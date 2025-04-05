@@ -1,0 +1,26 @@
+local teleportedThugs = {}
+local teleportStayDuration = 10
+
+while true do
+    task.wait(0.10)
+
+    local Living = workspace:FindFirstChild("Living")
+    if Living then
+        for _, Thug in ipairs(Living:GetChildren()) do
+            if Thug:IsA("Model") and Thug.Name == "Thug" and not teleportedThugs[Thug] then
+                local player = game.Players.LocalPlayer
+                local character = player.Character
+
+                if character and character:FindFirstChild("HumanoidRootPart") then
+                    local rootPart = character:FindFirstChild("HumanoidRootPart")
+                    local targetCFrame = Thug:GetPivot()
+                    rootPart.CFrame = targetCFrame
+                    teleportedThugs[Thug] = true
+                    task.wait(teleportStayDuration)
+                end
+            end
+        end
+    else
+        task.wait(1)
+    end
+end
