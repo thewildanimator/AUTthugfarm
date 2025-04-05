@@ -1,5 +1,5 @@
 local teleportedThugs = {}
-local teleportStayDuration = 10
+local teleportStayDuration = 3
 
 while true do
     task.wait(0.10)
